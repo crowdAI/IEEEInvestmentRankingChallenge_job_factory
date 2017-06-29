@@ -5,6 +5,7 @@ Flask==0.12.1
 itsdangerous==0.24
 Jinja2==2.9.6
 MarkupSafe==1.0
+numpy==1.13.0
 packaging==16.8
 pyparsing==2.2.0
 python-dateutil==2.6.0
@@ -12,6 +13,7 @@ redis==2.10.5
 rq==0.7.1
 rq-dashboard==0.3.7
 scikit-learn==0.18.2
+scipy==0.19.1
 six==1.10.0
 sklearn==0.0
 Werkzeug==0.12.1

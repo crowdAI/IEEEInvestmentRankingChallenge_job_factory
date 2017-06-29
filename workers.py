@@ -10,6 +10,9 @@ import json
 import sys
 import random
 
+from sklearn.metrics import mean_squared_error
+import numpy as np
+
 POOL = redis.ConnectionPool(host=config.redis_host, port=config.redis_port, db=0)
 
 def _evaluate(predicted_heights, true_heights, context):
@@ -19,6 +22,7 @@ def _evaluate(predicted_heights, true_heights, context):
     score = 0
     secondary_score = 0
 
+    """
     for k in range(100):
         time.sleep(random.randint(0,100)/1000.0)
         percent_complete = k*1.0/100 * 100
@@ -28,6 +32,12 @@ def _evaluate(predicted_heights, true_heights, context):
         #     # print "Update : ", percent_complete
         score += random.randint(1,100)*1.0/0.7 / 100
         secondary_score += random.randint(1,100)*1.0/0.7 / 100
+    """
+   
+    predicted_heights = np.array(predicted_heights)
+    true_heights = np.array(true_heights)
+    if predicted_heights.shape != true_heights.shape:
+        raise Exception("Wrong number of predictions sent. Expected variable of shape %s, but received a variable of shape %s" % ( str(true_heights.shape), str(predicted_heights.shape) ))
 
     _result_object = {
         "score" : score,
