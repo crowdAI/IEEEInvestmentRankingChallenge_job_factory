@@ -1,6 +1,8 @@
 import sys
 import os
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+dir_path = os.path.dirname(os.path.realpath(__file__))
+sys.path.append(dir_path)
 
 from rq.cli import worker
 if __name__ == '__main__':
