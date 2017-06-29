@@ -39,6 +39,8 @@ def _evaluate(predicted_heights, true_heights, context):
     if predicted_heights.shape != true_heights.shape:
         raise Exception("Wrong number of predictions provided. Expected a variable of shape %s, but received a variable of shape %s instead" % ( str(true_heights.shape), str(predicted_heights.shape) ))
 
+    score = mean_squared_error(true_heights, predicted_heights)
+
     _result_object = {
         "score" : score,
         "secondary_score" : secondary_score,
