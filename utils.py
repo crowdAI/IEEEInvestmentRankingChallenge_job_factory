@@ -41,6 +41,12 @@ def job_complete_template(context, result, message=""):
     response["message"] = message
     return response
 
+def job_info_template(context, message=""):
+    response = response_template(context['data_sequence_no'], context['job_id'])
+    response["response_type"] = CrowdAIEvents.Job["INFO"]
+    response["message"] = message
+    return response
+
 # TODO: Refactor all job events to use context instead
 def update_progress(context, percent_complete, message=""):
         #Register Progress

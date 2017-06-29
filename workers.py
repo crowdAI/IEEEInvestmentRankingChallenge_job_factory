@@ -116,6 +116,7 @@ def job_execution_wrapper(data):
             true_heights = np.load("test_heights.npy")
             result = _submit(data["data"], true_heights, _context)
             # Register Job Complete event
+            _update_job_event(_context, job_info_template(_context, "Scores Submitted Successfully ! Coefficient of Determination(R^2) : %s ; MSE : %s" % (str(result['score']), str(result['score_secondary'])) ))
             _update_job_event(_context, job_complete_template(_context, result))
         else:
             _error_object = job_error_template(job.id, "Function not implemented error")
