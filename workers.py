@@ -37,7 +37,7 @@ def _evaluate(predicted_heights, true_heights, context):
     predicted_heights = np.array(predicted_heights)
     true_heights = np.array(true_heights)
     if predicted_heights.shape != true_heights.shape:
-        raise Exception("Wrong number of predictions sent. Expected variable of shape %s, but received a variable of shape %s" % ( str(true_heights.shape), str(predicted_heights.shape) ))
+        raise Exception("Wrong number of predictions provided. Expected variable of shape %s, but received a variable of shape %s" % ( str(true_heights.shape), str(predicted_heights.shape) ))
 
     _result_object = {
         "score" : score,
@@ -85,7 +85,8 @@ def job_execution_wrapper(data):
     try:
         if data["function_name"] == "submit":
             # Run the job
-            result = _submit(data["data"], [], _context)
+            true_heights = np.load("test_heights.npy")
+            result = _submit(data["data"], true_heights, _context)
             # Register Job Complete event
             _update_job_event(_context, job_complete_template(_context, result))
         else:
