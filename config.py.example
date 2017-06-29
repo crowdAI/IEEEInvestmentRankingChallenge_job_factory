@@ -3,3 +3,4 @@ class Config:
     redis_port = 6379
     challenge_id = "OpenSNPChallenge2017"
     redis_namespace = challenge_id
+    CROWDAI_TOKEN=YOUR-CROWDAI-TOKEN-GRADER-TOKEN-HERE

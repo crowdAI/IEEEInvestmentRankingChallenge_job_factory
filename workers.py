@@ -13,6 +13,8 @@ import random
 from sklearn.metrics import mean_squared_error, f1_score
 import numpy as np
 
+import requests
+
 POOL = redis.ConnectionPool(host=config.redis_host, port=config.redis_port, db=0)
 
 def _evaluate(predicted_heights, true_heights, context):
@@ -56,7 +58,7 @@ def _evaluate(predicted_heights, true_heights, context):
 
     _result_object = {
         "score" : score,
-        "secondary_score" : secondary_score,
+        "score_secondary" : secondary_score,
     }
     return _result_object
 
@@ -71,6 +73,27 @@ def _submit(predicted_heights, true_heights, context):
     #_result_object["media_large"] = "https://upload.wikimedia.org/wikipedia/commons/4/44/Drift_Diffusion_Model_Accumulation_to_Threshold_Example_Graphs.png"
     #_result_object["media_thumbnail"] = "https://upload.wikimedia.org/wikipedia/commons/4/44/Drift_Diffusion_Model_Accumulation_to_Threshold_Example_Graphs.png"
     #_result_object["media_content_type"] = "image/jpeg"
+
+
+    # Upload result to crowdai
+    headers = {'Authorization' : 'Token token='+config.CROWDAI_TOKEN, "Content-Type":"application/vnd.api+json"}
+
+    _payload = _result_object
+    _payload['challenge_client_name'] = config.challenge_id
+    _payload['api_key'] = context['api_key']
+    _payload['grading_status'] = 'graded'
+
+    print "Making POST request...."
+    r = requests.post(config.CROWDAI_GRADER_URL, params=_payload, headers=headers, verify=False)
+    
+    print r
+    print r.text
+    """ TODO-Do Error Handling here
+    if r.status_code == 200:
+        pass #TODO: Add success message
+    else:
+        raise Exception("Unable to upload score to crowdAI...Please contact the admins"+str(r.status_code))
+    """
     return _result_object
 
 def _update_job_event(_context, data):
@@ -93,6 +116,7 @@ def job_execution_wrapper(data):
     _context['response_channel'] = data['broker_response_channel']
     _context['job_id'] = job.id
     _context['data_sequence_no'] = data['data_sequence_no']
+    _context['api_key'] = data['extra_params']['api_key']
 
     # Register Job Running event
     _update_job_event(_context, job_running_template(_context['data_sequence_no'], job.id))
