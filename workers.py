@@ -75,7 +75,7 @@ def job_execution_wrapper(data):
     try:
         if data["function_name"] == "submit":
             # Run the job
-            result = _submit(data["data"], _context)
+            result = _submit(data["data"], [], _context)
             # Register Job Complete event
             _update_job_event(_context, job_complete_template(_context, result))
         else:
