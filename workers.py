@@ -82,6 +82,7 @@ def _submit(predicted_heights, true_heights, context):
     _payload['challenge_client_name'] = config.challenge_id
     _payload['api_key'] = context['api_key']
     _payload['grading_status'] = 'graded'
+    _payload['comment'] = "#placeholder"
 
     print "Making POST request...."
     r = requests.post(config.CROWDAI_GRADER_URL, params=_payload, headers=headers, verify=False)
