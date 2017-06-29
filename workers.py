@@ -10,7 +10,7 @@ import json
 import sys
 import random
 
-from sklearn.metrics import mean_squared_error
+from sklearn.metrics import mean_squared_error, f1_score
 import numpy as np
 
 POOL = redis.ConnectionPool(host=config.redis_host, port=config.redis_port, db=0)
@@ -39,7 +39,20 @@ def _evaluate(predicted_heights, true_heights, context):
     if predicted_heights.shape != true_heights.shape:
         raise Exception("Wrong number of predictions provided. Expected a variable of shape %s, but received a variable of shape %s instead" % ( str(true_heights.shape), str(predicted_heights.shape) ))
 
-    score = mean_squared_error(true_heights, predicted_heights)
+    secondary_score = mean_squared_error(true_heights, predicted_heights)
+
+    def class_map(h):
+        if h <= 168.45:
+            return 0
+        elif h > 168.45 and h <= 178.5:
+            return 1
+        else:
+            return 2
+
+    y_true = [class_map(h) for h in true_heights]
+    y_pred = [class_map(h) for h in predicted_heights]
+
+    score = f1_score(y_true, y_pred, average='weighted')
 
     _result_object = {
         "score" : score,
