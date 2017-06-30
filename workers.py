@@ -74,15 +74,12 @@ def _submit(predicted_heights, true_heights, context):
 
     print "Making POST request...."
     r = requests.post(config.CROWDAI_GRADER_URL, params=_payload, headers=headers, verify=False)
+    print "Status Code : ",r.status_code
     
-    print r
-    print r.text
-    """ TODO-Do Error Handling here
-    if r.status_code == 200:
+    if r.status_code == 202:
         pass #TODO: Add success message
     else:
-        raise Exception("Unable to upload score to crowdAI...Please contact the admins"+str(r.status_code))
-    """
+        raise Exception(str(r.text))
     return _result_object
 
 def _update_job_event(_context, data):
