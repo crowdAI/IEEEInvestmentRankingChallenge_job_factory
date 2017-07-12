@@ -56,7 +56,7 @@ def _submit(predicted_heights, true_heights, context):
 
         and prepares the plots for submission to the leaderboard
     """
-    _result_object = _evaluate(predicted_heights, true_heights, context)
+    _result_object = _evaluate(predicted_heights[:50], true_heights[:50], context)
     #_result_object["comment"] = ""
     #_result_object["media_large"] = "https://upload.wikimedia.org/wikipedia/commons/4/44/Drift_Diffusion_Model_Accumulation_to_Threshold_Example_Graphs.png"
     #_result_object["media_thumbnail"] = "https://upload.wikimedia.org/wikipedia/commons/4/44/Drift_Diffusion_Model_Accumulation_to_Threshold_Example_Graphs.png"
