@@ -77,6 +77,10 @@ def _submit(predicted_heights, true_heights, context):
     print "Status Code : ",r.status_code
     
     if r.status_code == 202:
+        data = json.loads(r.text)
+        submission_id = str(data['submission_id'])
+        _payload['data'] = predicted_heights
+        context['redis_conn'].set(config.challenge_id+"::submissions::"+submission_id, json.dumps(_payload)) 
         pass #TODO: Add success message
     else:
         raise Exception(str(r.text))
@@ -120,7 +124,6 @@ def job_execution_wrapper(data):
             _update_job_event(_context, job_error_template(job.id, result))
             result = _error_object
     except Exception as e:
-        # print "Error : ", str(e)
         _error_object = job_error_template(_context['data_sequence_no'], job.id, str(e))
         _update_job_event(_context, _error_object)
     return result
