@@ -25,7 +25,7 @@ import json
 
 from workers import job_execution_wrapper
 
-POOL = redis.ConnectionPool(host=config.redis_host, port=config.redis_port, db=0)
+POOL = redis.ConnectionPool(host=config.redis_host, port=config.redis_port, password=config.redis_password, db=config.redis_db)
 r = redis.Redis(connection_pool=POOL)
 JOB_QUEUE = Queue(connection=r)
 #Listen to BRPOP events
