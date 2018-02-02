@@ -100,3 +100,6 @@ ENV/
 /site
 test_heights.npy
 config.py
+
+ground_truth.csv
+temp/

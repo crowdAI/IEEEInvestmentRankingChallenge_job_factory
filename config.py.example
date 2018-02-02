@@ -4,3 +4,5 @@ class Config:
     challenge_id = "OpenSNPChallenge2017"
     redis_namespace = challenge_id
     CROWDAI_TOKEN=YOUR-CROWDAI-TOKEN-GRADER-TOKEN-HERE
+
+    answer_file_path = "data/ground_truth.csv"
