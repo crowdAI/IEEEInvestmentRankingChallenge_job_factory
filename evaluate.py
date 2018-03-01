@@ -37,7 +37,7 @@ def compute_mape(data, ground_truth):
     :param ground_truth: real values
     :return: MAPE
     """
-    return 100 / len(ground_truth) * np.sum(np.abs((ground_truth.value - data.value) / ground_truth.value))
+    return float(100) / len(ground_truth) * np.sum(np.abs((ground_truth.value - data.value) / ground_truth.value))
 
 
 def _evaluate(client_payload, answer_file_path, context):

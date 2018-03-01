@@ -60,11 +60,12 @@ def _submit(client_payload, answer_file_path, context):
                         submission_id=submission_id,
                         status='graded')
         # Clean up file if possible
-        os.rm(localfilepath)
+        os.remove(localfilepath)
         return _result_object
     except Exception as e:
         # Report to crowdAI
-        del _payload["meta"]
+        if "meta" in _payload.keys():
+            del _payload["meta"]
         report_to_crowdai(
                         context,
                         _payload,
