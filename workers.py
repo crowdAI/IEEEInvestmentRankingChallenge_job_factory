@@ -1,8 +1,6 @@
 from config import Config as config
 import redis
 from rq import get_current_job
-#from evalute import _evaluate
-import evaluate
 import os
 
 from helpers import _update_job_event, download_file, report_to_crowdai
@@ -49,9 +47,9 @@ def _submit(client_payload, answer_file_path, context):
         _client_payload = {}
         _client_payload["predicted_data_path"] = localfilepath
 
-        _result_object = evaluate._evaluate(
+        _result_object = config.evaluator._evaluate(
             _client_payload,
-            config.answer_file_path, context)
+            context)
 
         _payload = _result_object
         report_to_crowdai(

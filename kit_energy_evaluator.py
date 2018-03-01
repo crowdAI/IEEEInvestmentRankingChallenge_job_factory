@@ -4,7 +4,7 @@ import numpy as np
 
 
 class KITEnergyEvaluatror:
-    def __init__(self, answer_file_path, context={}):
+    def __init__(self, answer_file_path):
         """
         Initialise an evaluator
 
@@ -40,10 +40,11 @@ class KITEnergyEvaluatror:
         """
         return float(100) / len(self.ground_truth) * np.sum(np.abs((self.ground_truth.value - data.value) / self.ground_truth.value))
 
-    def _evaluate(self, client_payload):
+    def _evaluate(self, client_payload, context={}):
         """
-            client_payload : Object holding the client payload
+            :param client_payload : Object holding the client payload
                 -predicted_data_path: Path to the submitted file
+            :param context : Object holding extra parameters for advanced usage
         """
 
         """
@@ -68,7 +69,6 @@ class KITEnergyEvaluatror:
 if __name__ == "__main__":
     client_payload = {}
     client_payload["predicted_data_path"] = "temp/sample_submission.csv"
-
     _answer_file_path = "data/ground_truth.csv"
 
     evaluator = KITEnergyEvaluatror(_answer_file_path)
