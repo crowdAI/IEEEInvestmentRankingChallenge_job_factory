@@ -2,14 +2,14 @@
 
 
 ## Installation (For crowdAI admins)
-```
+```bash
 git clone git@github.com:crowdAI/crowdAI-KIT-energy-challenge-job-factory.git
 cd crowdAI-KIT-energy-challenge-job-factory
 pip install -r requirements.txt
 ```
 
 ## Usage (For crowdAI admins)
-```
+```bash
 cp config.py.example config.py
 # Edit config.py to add your relevant
 python run.py #Runs the interface of interacting with the broker
@@ -17,7 +17,7 @@ rqworker -c settings # Runs the actual worker(s)
 ```
 
 ## Usage for Challenge Oragnisers
-```
+```bash
 git clone git@github.com:crowdAI/crowdAI-KIT-energy-challenge-job-factory.git
 cd crowdAI-KIT-energy-challenge-job-factory
 pip install -r requirements.txt
@@ -25,7 +25,7 @@ pip install -r requirements.txt
 
 Then you need to define a class for your challenge similar to `kit_energy_evaluator.py`
 The simplest definition can be :
-```
+```python
 import pandas as pd
 class ExampleEvaluator:
   def __init__(self, answer_file_path):
@@ -50,14 +50,14 @@ class ExampleEvaluator:
 ```
 
 ## Installation (for participants)
-```
+```bash
 pip install --upgrade crowdai
 # This challenge expects atleast crowdai client version 1.0.15
 ```
 
 ## Usage (for participants)
 
-```
+```python
 import crowdai
 api_key = "YOUR CROWDAI API KEY HERE"
 challenge = crowdai.Challenge("KITEnergyChallenge", api_key)
