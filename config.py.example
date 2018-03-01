@@ -1,8 +1,19 @@
 class Config:
     redis_host = "localhost"
     redis_port = 6379
-    challenge_id = "OpenSNPChallenge2017"
+    challenge_id = "KITEnergyChallenge"
     redis_namespace = challenge_id
-    CROWDAI_TOKEN=YOUR-CROWDAI-TOKEN-GRADER-TOKEN-HERE
+
+    CROWDAI_TOKEN="<CROWDAI_TOKEN>"
+    CROWDAI_GRADER_URL = "https://www.crowdai.org/api/external_graders/"
 
     answer_file_path = "data/ground_truth.csv"
+
+    AWS_S3_BUCKET = "crowdai-shared"
+    S3_UPLOAD_PATH = "kit-energy-challenge"
+    AWS_ACCESS_KEY_ID = "<AWS_ACCESS_KEY_ID>"
+    AWS_SECRET_ACCESS_KEY = "<AWS_SECRET_ACCESS_KEY>"
+
+    DEBUG_MODE=True
+
+    TEMP_STORAGE_DIRECTORY_PATH="temp/"

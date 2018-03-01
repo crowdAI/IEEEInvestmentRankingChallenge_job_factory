@@ -18,6 +18,11 @@ def check_file_validity(data, ground_truth):
     if valid:
         valid &= np.all(data.sensor == ground_truth.sensor)
         valid &= np.all(data.ts == ground_truth.ts)
+
+    if not valid:
+        raise Exception("The submitted file does not seem to be a valid submission file.")
+        # TODO: You can add more checks and better error messages here
+
     return valid
 
 
@@ -51,7 +56,7 @@ def _evaluate(client_payload, answer_file_path, context):
 
     ground_truth = pd.read_csv(answer_file_path, float_precision='round_trip')
     # Format validation
-    assert(check_file_validity(predicted_data, ground_truth))
+    check_file_validity(predicted_data, ground_truth)
     # Score calculation
     score = compute_mape(predicted_data, ground_truth)
 
@@ -65,7 +70,7 @@ def _evaluate(client_payload, answer_file_path, context):
 
 if __name__ == "__main__":
     client_payload = {}
-    client_payload["predicted_data_path"] = "data/sample_submission.csv"
+    client_payload["predicted_data_path"] = "temp/sample_submission.csv"
 
     _answer_file_path = "data/ground_truth.csv"
 
