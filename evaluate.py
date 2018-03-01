@@ -65,7 +65,7 @@ def _evaluate(client_payload, answer_file_path, context):
 
 if __name__ == "__main__":
     client_payload = {}
-    client_payload["predicted_data_path"] = "temp/sample_submission.csv"
+    client_payload["predicted_data_path"] = "data/sample_submission.csv"
 
     _answer_file_path = "data/ground_truth.csv"
 

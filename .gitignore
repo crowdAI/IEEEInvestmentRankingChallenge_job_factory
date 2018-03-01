@@ -105,3 +105,5 @@ ground_truth.csv
 temp/
 
 data/*
+
+sample_submission.csv
