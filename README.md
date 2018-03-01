@@ -35,7 +35,7 @@ class ExampleEvaluator:
     submission = pd.read_csv("submission_file_path")
 
     """
-    Do something with your submitted file to compute up
+    Do something with your submitted file to come up
     with a score and a secondary score.
 
     if you want to report back an error to the user,
