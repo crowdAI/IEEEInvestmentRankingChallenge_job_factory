@@ -1,2 +1,6 @@
 from config import Config as config
-REDIS_URL = 'redis://:{}@localhost:6379/{}'.format(config.redis_password, config.redis_db)
+REDIS_HOST = config.redis_host
+REDIS_PORT = config.redis_port
+if config.redis_password:
+	REDIS_PASSWORD = config.redis_password
+REDIS_DB = config.redis_db
