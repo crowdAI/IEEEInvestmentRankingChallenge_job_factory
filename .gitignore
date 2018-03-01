@@ -103,3 +103,5 @@ config.py
 
 ground_truth.csv
 temp/
+
+data/*
