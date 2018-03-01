@@ -46,7 +46,8 @@ def report_to_crowdai(_context, _payload, submission_id=False,
             "{}/{}".format(config.CROWDAI_GRADER_URL, submission_id),
             params=_payload, headers=headers, verify=False
         )
-        print("RESPONSE : ", r.text)
+
+    print("RESPONSE : ", r.text)
     if r.status_code == 202:
         data = json.loads(r.text)
         submission_id = str(data['submission_id'])
@@ -55,14 +56,9 @@ def report_to_crowdai(_context, _payload, submission_id=False,
         _message = """
             Unable to register submission on crowdAI.
             Please contact the admins."""
-        try:
-            response = json.loads(r.text)
-            _message = response['message']
-            raise Exception(_message)
-        except Exception as e:
-            print(str(e))
-            pass
-
+        response = json.loads(r.text)
+        _message = response['message']
+        raise Exception(_message)
 
 
 def get_boto_client():

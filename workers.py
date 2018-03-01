@@ -3,6 +3,7 @@ import redis
 from rq import get_current_job
 #from evalute import _evaluate
 import evaluate
+import os
 
 from helpers import _update_job_event, download_file, report_to_crowdai
 from utils import job_info_template, job_complete_template
@@ -58,6 +59,8 @@ def _submit(client_payload, answer_file_path, context):
                         _payload,
                         submission_id=submission_id,
                         status='graded')
+        # Clean up file if possible
+        os.rm(localfilepath)
         return _result_object
     except Exception as e:
         # Report to crowdAI
