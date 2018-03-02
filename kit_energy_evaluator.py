@@ -17,16 +17,18 @@ class KITEnergyEvaluatror:
                             )
 
     def check_file_validity(self, data):
-        valid = True
-        valid &= len(data) == len(self.ground_truth)
-        valid &= np.all(data.columns == self.ground_truth.columns)
-        if valid:
-            valid &= np.all(data.sensor == self.ground_truth.sensor)
-            valid &= np.all(data.ts == self.ground_truth.ts)
-        if not valid:
-            raise Exception("The submitted file does not seem to be a valid submission file.")
-            # TODO: You can add more checks and better error messages here
-        return valid
+        if len(data) != len(self.ground_truth):
+            raise Exception("Expected '{}' rows but the submitted file has '{}'.".format(len(self.ground_truth),
+                                                                                         len(data)))
+        if np.any(data.columns != self.ground_truth.columns):
+            raise Exception("Expected columns '{}' but the submitted file has '{}'.".format(
+                str(self.ground_truth.columns.values),
+                str(data.columns.values)))
+        if np.any(data.ts != self.ground_truth.ts):
+            raise Exception("The row order in the submitted file is incorrect (incorrect timestamp order).")
+        if np.any(data.sensor != self.ground_truth.sensor):
+            raise Exception("The row order in the submitted file is incorrect (incorrect sensor id order).")
+        return True
 
     def compute_mape(self, data):
         """

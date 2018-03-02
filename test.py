@@ -5,7 +5,7 @@ from tempfile import NamedTemporaryFile
 
 import pandas as pd
 
-from evaluate import _evaluate
+from kit_energy_evaluator import KITEnergyEvaluatror
 
 
 class TestKitEnergyEvaluator(unittest.TestCase):
@@ -31,7 +31,7 @@ class TestKitEnergyEvaluator(unittest.TestCase):
         prediction.columns = ['sensor', 'ts', 'foo']
         try:
             self.run_scenario(prediction)
-        except AssertionError:
+        except Exception:
             return
         raise AssertionError('should raise an exception')
 
@@ -44,7 +44,7 @@ class TestKitEnergyEvaluator(unittest.TestCase):
         prediction = prediction.drop(0)
         try:
             self.run_scenario(prediction)
-        except AssertionError:
+        except Exception:
             return
         raise AssertionError('should raise an exception')
 
@@ -57,7 +57,7 @@ class TestKitEnergyEvaluator(unittest.TestCase):
         prediction = prediction.sort_values('value', ascending=False)
         try:
             self.run_scenario(prediction)
-        except AssertionError:
+        except Exception:
             return
         raise AssertionError('should raise an exception')
 
@@ -95,7 +95,8 @@ class TestKitEnergyEvaluator(unittest.TestCase):
         ground_truth_tmp_file = NamedTemporaryFile()
         self.GROUND_TRUTH.to_csv(ground_truth_tmp_file.name, index=False)
         client_payload = {'predicted_data_path': prediction_tmp_file.name}
-        result = _evaluate(client_payload, ground_truth_tmp_file.name, {})
+        evaluator = KITEnergyEvaluatror(ground_truth_tmp_file.name)
+        result = evaluator._evaluate(client_payload)
         prediction_tmp_file.close()
         ground_truth_tmp_file.close()
         return result
