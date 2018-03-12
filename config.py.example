@@ -1,16 +1,18 @@
-import kit_energy_evaluator
+import ieee_stock_prediction_challenge_evaluator
+
 class Config:
     redis_host = "localhost"
     redis_port = 6379
-    challenge_id = "KITEnergyChallenge"
+    redis_db = 7
+    challenge_id = "IEEEStockPredictionChallenge"
     redis_namespace = challenge_id
 
     CROWDAI_TOKEN="<CROWDAI_TOKEN>"
     CROWDAI_GRADER_URL = "https://www.crowdai.org/api/external_graders/"
 
     answer_file_path = "data/ground_truth.csv"
-    evaluator = kit_energy_evaluator.KITEnergyEvaluatror(answer_file_path)
-  
+    evaluator = ieee_stock_prediction_challenge_evaluator.IEEEStockPredictionChallengeEvaluator(answer_file_path)
+
     AWS_S3_BUCKET = "crowdai-shared"
     S3_UPLOAD_PATH = "kit-energy-challenge"
     AWS_ACCESS_KEY_ID = "<AWS_ACCESS_KEY_ID>"
