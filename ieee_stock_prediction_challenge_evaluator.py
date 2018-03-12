@@ -63,4 +63,4 @@ class IEEEStockPredictionChallengeEvaluator:
             "score": np.mean(results['spearman']),
             "score_secondary" : np.mean(results['NDCG'])
         }
-return _result_object
+        return _result_object
