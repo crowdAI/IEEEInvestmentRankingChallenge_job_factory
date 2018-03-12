@@ -42,10 +42,10 @@ class IEEEStockPredictionChallengeEvaluator:
         self.answer_file_path = answer_file_path
 
     def _evaluate(self, submission_file_path):
-        submission = pd.read_csv("submission_file_path")
+        submission = pd.read_csv(submission_file_path)
 
         # read in actuals .csv --- Is this the right way to reference?
-        actuals = pd.read_csv(answer_file_path)
+        actuals = pd.read_csv(self.answer_file_path)
 
         # unique time periods to use in the for loop
         time_periods = np.unique(actuals['time_period'])
@@ -64,3 +64,7 @@ class IEEEStockPredictionChallengeEvaluator:
             "score_secondary" : np.mean(results['NDCG'])
         }
         return _result_object
+
+if __name__ == "__main__":
+    evaluator = IEEEStockPredictionChallengeEvaluator("data/ground_truth.csv")
+    evaluator._evaluate("data/sample_submission.csv")
