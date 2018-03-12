@@ -34,7 +34,7 @@ def calc_metrics(time_period, pred_df, actuals_df):
     NDCG = DCG/IDCG
 
     # return time_period, spearman correlation, NDCG
-    return pd.DataFrame([time_period,spearman,NDCG)
+    return pd.DataFrame([time_period,spearman,NDCG])
 
 
 class IEEEStockPredictionChallengeEvaluator:
