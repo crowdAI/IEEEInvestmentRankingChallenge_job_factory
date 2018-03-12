@@ -52,7 +52,7 @@ class ExampleEvaluator:
 ## Installation (for participants)
 ```bash
 pip install --upgrade crowdai
-# This challenge expects atleast crowdai client version 1.0.15
+# This challenge expects atleast crowdai client version 1.0.16
 ```
 
 ## Usage (for participants)
