@@ -1,10 +1,10 @@
-# Kit Energy Challenge Job Factory
+# IEEE Stock Prediction Challenge Job Factory
 
 
 ## Installation (For crowdAI admins)
 ```bash
-git clone git@github.com:crowdAI/crowdAI-KIT-energy-challenge-job-factory.git
-cd crowdAI-KIT-energy-challenge-job-factory
+git clone git@github.com:crowdAI/IEEEStockPredictionChallenge_job_factory.git
+cd IEEEStockPredictionChallenge_job_factory
 pip install -r requirements.txt
 ```
 
@@ -18,12 +18,12 @@ rqworker -c settings # Runs the actual worker(s)
 
 ## Usage for Challenge Oragnisers
 ```bash
-git clone git@github.com:crowdAI/crowdAI-KIT-energy-challenge-job-factory.git
-cd crowdAI-KIT-energy-challenge-job-factory
+git clone git@github.com:crowdAI/IEEEStockPredictionChallenge_job_factory.git
+cd IEEEStockPredictionChallenge_job_factory
 pip install -r requirements.txt
 ```
 
-Then you need to define a class for your challenge similar to `kit_energy_evaluator.py`
+Then you need to define a class for your challenge similar to `ieee_stock_prediction_challenge_evaluator.py`
 The simplest definition can be :
 ```python
 import pandas as pd
@@ -60,7 +60,7 @@ pip install --upgrade crowdai
 ```python
 import crowdai
 api_key = "YOUR CROWDAI API KEY HERE"
-challenge = crowdai.Challenge("KITEnergyChallenge", api_key)
+challenge = crowdai.Challenge("IEEEStockPredictionChallenge", api_key)
 result = challenge.submit("sample_submission.csv")
 print(result)
 ```
