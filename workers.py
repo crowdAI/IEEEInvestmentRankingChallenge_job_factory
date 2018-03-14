@@ -42,6 +42,7 @@ def _submit(client_payload, answer_file_path, context):
                     _payload,
                     submission_id=False,
                     status='submitted')
+    print("Submission id : ", submission_id)
     try:
         localfilepath = download_file(context, file_key)
         _client_payload = {}
@@ -50,7 +51,7 @@ def _submit(client_payload, answer_file_path, context):
         _result_object = config.evaluator._evaluate(
             _client_payload,
             context)
-
+        print _result_object
         _payload = _result_object
         report_to_crowdai(
                         context,

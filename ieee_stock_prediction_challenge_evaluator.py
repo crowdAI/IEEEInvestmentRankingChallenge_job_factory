@@ -67,8 +67,8 @@ class IEEEStockPredictionChallengeEvaluator:
         results.iloc[:,1:2] = np.round(results.iloc[:,1:2],decimals=5)
 
         _result_object = {
-            "score": np.mean(results['spearman']),
-            "score_secondary" : np.mean(results['NDCG'])
+            "score":float( np.mean(results['spearman'])),
+            "score_secondary" : float(np.mean(results['NDCG']))
         }
         return _result_object
 

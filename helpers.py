@@ -34,7 +34,7 @@ def report_to_crowdai(_context, _payload, submission_id=False,
         _payload['grading_message'] = message
     if status:
         _payload['grading_status'] = status
-
+    print("Payload : ", _payload)
     if not submission_id:
         print "Making POST request...."
         r = requests.post(
