@@ -73,5 +73,5 @@ class IEEEStockPredictionChallengeEvaluator:
         return _result_object
 
 if __name__ == "__main__":
-    evaluator = IEEEStockPredictionChallengeEvaluator("data/ground_truth_corrected.csv")
+    evaluator = IEEEStockPredictionChallengeEvaluator("data/ground_truth.csv")
     print(evaluator._evaluate("data/sample_submission.csv"))
