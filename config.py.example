@@ -1,20 +1,20 @@
-import ieee_stock_prediction_challenge_evaluator
+import ieee_investment_ranking_challenge_evaluator
 
 class Config:
     redis_host = "localhost"
     redis_port = 6379
     redis_db = 7
-    challenge_id = "IEEEStockPredictionChallenge"
+    challenge_id = "IEEEInvestmentRankingChallenge"
     redis_namespace = challenge_id
 
     CROWDAI_TOKEN="<CROWDAI_TOKEN>"
     CROWDAI_GRADER_URL = "https://www.crowdai.org/api/external_graders/"
 
     answer_file_path = "data/ground_truth.csv"
-    evaluator = ieee_stock_prediction_challenge_evaluator.IEEEStockPredictionChallengeEvaluator(answer_file_path)
+    evaluator = ieee_investment_ranking_challenge_evaluator.IEEEInvestmentRankingChallengeEvaluator(answer_file_path)
 
     AWS_S3_BUCKET = "crowdai-shared"
-    S3_UPLOAD_PATH = "ieee_stock_prediction_challenge"
+    S3_UPLOAD_PATH = "ieee_investment_ranking_challenge"
     AWS_ACCESS_KEY_ID = "<AWS_ACCESS_KEY_ID>"
     AWS_SECRET_ACCESS_KEY = "<AWS_SECRET_ACCESS_KEY>"
 
