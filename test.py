@@ -94,7 +94,7 @@ class TestKitEnergyEvaluator(unittest.TestCase):
         prediction.to_csv(prediction_tmp_file.name, index=False)
         ground_truth_tmp_file = NamedTemporaryFile()
         self.GROUND_TRUTH.to_csv(ground_truth_tmp_file.name, index=False)
-        client_payload = {'predicted_data_path': prediction_tmp_file.name}
+        client_payload = {'submission_file_path': prediction_tmp_file.name}
         evaluator = KITEnergyEvaluatror(ground_truth_tmp_file.name)
         result = evaluator._evaluate(client_payload)
         prediction_tmp_file.close()

@@ -31,7 +31,8 @@ class ExampleEvaluator:
   def __init__(self, answer_file_path):
     self.answer_file_path = answer_file_path
 
-  def _evaluate(self, submission_file_path):
+  def _evaluate(self, client_payload, _context={}):
+    submission_file_path = client_payload["submission_file_path"]
     submission = pd.read_csv("submission_file_path")
 
     """

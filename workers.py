@@ -46,7 +46,7 @@ def _submit(client_payload, answer_file_path, context):
     try:
         localfilepath = download_file(context, file_key)
         _client_payload = {}
-        _client_payload["predicted_data_path"] = localfilepath
+        _client_payload["submission_file_path"] = localfilepath
 
         _result_object = config.evaluator._evaluate(
             _client_payload,

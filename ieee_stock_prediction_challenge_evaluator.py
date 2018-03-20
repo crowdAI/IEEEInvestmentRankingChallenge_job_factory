@@ -48,7 +48,8 @@ class IEEEStockPredictionChallengeEvaluator:
     def __init__(self, answer_file_path):
         self.answer_file_path = answer_file_path
         
-    def _evaluate(self, submission_file_path):
+    def _evaluate(self, client_payload, _context={}):
+        submission_file_path = client_payload['submission_file_path']
         submission = pd.read_csv(submission_file_path)
         
         # read in actuals .csv --- Is this the right way to reference?
@@ -74,4 +75,6 @@ class IEEEStockPredictionChallengeEvaluator:
 
 if __name__ == "__main__":
     evaluator = IEEEStockPredictionChallengeEvaluator("data/ground_truth.csv")
-    print(evaluator._evaluate("data/sample_submission.csv"))
+    _payload = {}
+    _payload["submission_file_path"] = "data/sample_submission.csv"
+    print(evaluator._evaluate(_payload))
