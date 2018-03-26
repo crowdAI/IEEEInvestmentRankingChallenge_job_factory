@@ -57,7 +57,7 @@ class IEEEInvestmentRankingChallengeEvaluator:
 
         # unique time periods to use in the for loop
         time_periods = np.unique(actuals['time_period'])
-        time_periods = np.setdiff1d(time_periods,['2016_2','2017_1'])
+        time_periods = np.setdiff1d(time_periods,['2017_1'])
 
         # apply the calc_metrics function to each time period and store the results in a data frame
         results = pd.DataFrame(columns=['time_period','spearman','NDCG'])
