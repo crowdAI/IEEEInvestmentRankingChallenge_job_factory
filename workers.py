@@ -103,7 +103,7 @@ def job_execution_wrapper(data):
             _update_job_event(
                 _context,
                 job_info_template(
-                    _context, "Scores Submitted Successfully ! Mean Absolute Percentage Error (MAPE) : %s" % (str(result['score'])))
+                    _context, "Scores Submitted Successfully ! {} : {}".format(config.primary_score_name, str(result['score'])))
                 )
             _update_job_event(
                 _context,

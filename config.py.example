@@ -12,6 +12,7 @@ class Config:
 
     answer_file_path = "data/ground_truth.csv"
     evaluator = ieee_investment_ranking_challenge_evaluator.IEEEInvestmentRankingChallengeEvaluator(answer_file_path)
+    primary_score_name = "Spearman correlation"
 
     AWS_S3_BUCKET = "crowdai-shared"
     S3_UPLOAD_PATH = "ieee_investment_ranking_challenge"
