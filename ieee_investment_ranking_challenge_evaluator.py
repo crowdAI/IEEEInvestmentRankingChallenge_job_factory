@@ -28,13 +28,13 @@ def calc_metrics(time_period, pred_df, actuals_df):
     #calculate NDCG = DCG of Top 20% / Ideal DCG of Top 20%
     # subset top 20% predictions
     t20 = combined.loc[combined['Rank_F6M_pred'] <= np.nanpercentile(combined['Rank_F6M_pred'],20),:]
-    t20['discount'] = np.amax(combined['Rank_F6M_pred'])/(np.amax(combined['Rank_F6M_pred'])-combined['Rank_F6M_pred'])
+    t20['discount'] = np.amax(combined['Rank_F6M_pred'])/(np.amax(combined['Rank_F6M_pred'])+combined['Rank_F6M_pred'])
     t20['gain'] = t20['Norm_Ret_F6M']*t20['discount']
     DCG = np.sum(t20['gain'])
 
     #subset top 20% actuals
     i20 = combined.loc[combined['Rank_F6M'] <= np.nanpercentile(combined['Rank_F6M'],20),:]
-    i20['discount'] = np.amax(combined['Rank_F6M'])/(np.amax(combined['Rank_F6M'])-combined['Rank_F6M'])
+    i20['discount'] = np.amax(combined['Rank_F6M'])/(np.amax(combined['Rank_F6M'])+combined['Rank_F6M'])
     i20['gain'] = i20['Norm_Ret_F6M']*i20['discount']
     IDCG = np.sum(i20['gain'])
 
