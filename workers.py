@@ -6,6 +6,7 @@ import os
 from helpers import _update_job_event, download_file, report_to_crowdai
 from utils import job_info_template, job_complete_template
 from utils import job_error_template, job_running_template
+import json
 
 if config.redis_password:
     POOL = redis.ConnectionPool(
@@ -36,7 +37,7 @@ def _submit(client_payload, answer_file_path, context):
     _payload = {}
     _meta = {}
     _meta['file_key'] = file_key
-    _payload["meta"] = _meta
+    _payload["meta"] = json.dumps(_meta)
     submission_id = report_to_crowdai(
                     context,
                     _payload,
