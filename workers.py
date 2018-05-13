@@ -130,7 +130,7 @@ def job_execution_wrapper(data):
             _update_job_event(
                 _context,
                 job_info_template(
-                    _context, "Scores Submitted Successfully ! ")
+                    _context, "Scores Submitted Successfully ! Please remember to upload your code and a description of your approach (as a short paper) to https://gitlab.crowdai.org , as a private repository, tto be eligible for the final round-2 rankings.")
                 )
             _update_job_event(
                 _context,
