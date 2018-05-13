@@ -121,10 +121,15 @@ def job_execution_wrapper(data):
 
             result = _submit(data["data"], answer_file_path, _context)
             # Register Job Complete event
+            if data["data"]["round"] == 2:
+                # Hide scores in case of round 2
+                del result["score"]
+                del result["score_secondary"]
+
             _update_job_event(
                 _context,
                 job_info_template(
-                    _context, "Scores Submitted Successfully ! {} : {}".format(config.primary_score_name, str(result['score'])))
+                    _context, "Scores Submitted Successfully ! ")
                 )
             _update_job_event(
                 _context,
