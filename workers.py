@@ -71,13 +71,14 @@ def _submit(client_payload, answer_file_path, context):
         _result_object = config.evaluator._evaluate(
             client_payload=_client_payload,
             round_indicator=round_id,
-            context=context)
+            _context=context)
         print _result_object
         _payload = _result_object
         report_to_crowdai(
                         context,
                         _payload,
                         submission_id=submission_id,
+                        message = "graded successfully",
                         status='graded')
         # Clean up file if possible
         os.remove(localfilepath)
