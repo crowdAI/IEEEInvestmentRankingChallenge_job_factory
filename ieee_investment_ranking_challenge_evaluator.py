@@ -45,11 +45,10 @@ def calc_metrics(time_period, pred_df, actuals_df):
 
 
 class IEEEInvestmentRankingChallengeEvaluator:
-    def __init__(self, answer_file_path,round_indicator=1):
+    def __init__(self, answer_file_path):
         self.answer_file_path = answer_file_path
-        self.round_indicator = round_indicator
 
-    def _evaluate(self, client_payload, _context={}):
+    def _evaluate(self, client_payload, round_indicator=1, _context={}):
         submission_file_path = client_payload['submission_file_path']
         submission = pd.read_csv(submission_file_path)
 
@@ -57,7 +56,7 @@ class IEEEInvestmentRankingChallengeEvaluator:
         actuals = pd.read_csv(self.answer_file_path)
 
         # unique time periods to use in the for loop
-        if self.round_indicator == 1:
+        if round_indicator == 1:
             time_periods = np.unique(actuals['time_period'])
             time_periods = np.setdiff1d(time_periods,['2017_1'])
         else:
@@ -78,7 +77,7 @@ class IEEEInvestmentRankingChallengeEvaluator:
         return _result_object
 
 if __name__ == "__main__":
-    # Round 1: round_indicator = 1 
+    # Round 1: round_indicator = 1
     # Round 2: round_indicator = 2
     round_indicator = 2
     evaluator = IEEEInvestmentRankingChallengeEvaluator("data/ground_truth_w_2017.csv",round_indicator)

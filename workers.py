@@ -34,10 +34,29 @@ def _submit(client_payload, answer_file_path, context):
             context, "Grading Submission....")
     )
 
+    if "round" not in client_payload.keys():
+        raise Exception("""
+        The round parameter has not been specified. Please upgrade your
+        crowdai client to atleast version 1.0.21 by :
+        pip install -U crowdai
+
+        and then update your submission code by following the latest instructions
+        from :
+        https://github.com/crowdAI/ieee_investment_ranking_challenge-starter-kit#submission-of-predicted-file-to-crowdai
+        """)
+
+    round_id = client_payload["round"]
+    assert round_id in config.crowdai_round_id_map.keys(), \
+        "Unknown Round ID Passed. Allowed values : {}".format(
+            str(config.crowdai_round_id_map.keys())
+        )
+    crowdai_round_id = config.crowdai_round_id_map[round_id]
+
     _payload = {}
     _meta = {}
     _meta['file_key'] = file_key
     _payload["meta"] = json.dumps(_meta)
+    _payload["challenge_round_id"] = crowdai_round_id
     submission_id = report_to_crowdai(
                     context,
                     _payload,
@@ -50,8 +69,9 @@ def _submit(client_payload, answer_file_path, context):
         _client_payload["submission_file_path"] = localfilepath
 
         _result_object = config.evaluator._evaluate(
-            _client_payload,
-            context)
+            client_payload=_client_payload,
+            round_indicator=round_id,
+            context=context)
         print _result_object
         _payload = _result_object
         report_to_crowdai(

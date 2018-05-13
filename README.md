@@ -31,7 +31,9 @@ class ExampleEvaluator:
   def __init__(self, answer_file_path):
     self.answer_file_path = answer_file_path
 
-  def _evaluate(self, client_payload, _context={}):
+  def _evaluate(self, client_payload, round_indicator=1, _context={}):
+    assert round_indicator in [1,2]
+
     submission_file_path = client_payload["submission_file_path"]
     submission = pd.read_csv("submission_file_path")
 
@@ -62,7 +64,7 @@ pip install --upgrade crowdai
 import crowdai
 api_key = "YOUR CROWDAI API KEY HERE"
 challenge = crowdai.Challenge("IEEEInvestmentRankingChallenge", api_key)
-result = challenge.submit("sample_submission.csv")
+result = challenge.submit("sample_submission.csv", round=2)
 print(result)
 ```
 
