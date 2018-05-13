@@ -45,7 +45,7 @@ def calc_metrics(time_period, pred_df, actuals_df):
 
 
 class IEEEInvestmentRankingChallengeEvaluator:
-    def __init__(self, answer_file_path,round_indicator):
+    def __init__(self, answer_file_path,round_indicator=1):
         self.answer_file_path = answer_file_path
         self.round_indicator = round_indicator
 
