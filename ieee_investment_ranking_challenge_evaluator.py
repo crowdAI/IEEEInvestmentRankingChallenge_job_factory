@@ -45,8 +45,9 @@ def calc_metrics(time_period, pred_df, actuals_df):
 
 
 class IEEEInvestmentRankingChallengeEvaluator:
-    def __init__(self, answer_file_path):
+    def __init__(self, answer_file_path,round_indicator):
         self.answer_file_path = answer_file_path
+        self.round_indicator = round_indicator
 
     def _evaluate(self, client_payload, _context={}):
         submission_file_path = client_payload['submission_file_path']
@@ -56,8 +57,11 @@ class IEEEInvestmentRankingChallengeEvaluator:
         actuals = pd.read_csv(self.answer_file_path)
 
         # unique time periods to use in the for loop
-        time_periods = np.unique(actuals['time_period'])
-        time_periods = np.setdiff1d(time_periods,['2017_1'])
+        if self.round_indicator == 1:
+            time_periods = np.unique(actuals['time_period'])
+            time_periods = np.setdiff1d(time_periods,['2017_1'])
+        else:
+            time_periods = ['2017_1']
 
         # apply the calc_metrics function to each time period and store the results in a data frame
         results = pd.DataFrame(columns=['time_period','spearman','NDCG'])
@@ -74,7 +78,10 @@ class IEEEInvestmentRankingChallengeEvaluator:
         return _result_object
 
 if __name__ == "__main__":
-    evaluator = IEEEInvestmentRankingChallengeEvaluator("data/ground_truth.csv")
+    # Round 1: round_indicator = 1 
+    # Round 2: round_indicator = 2
+    round_indicator = 2
+    evaluator = IEEEInvestmentRankingChallengeEvaluator("data/ground_truth_w_2017.csv",round_indicator)
     _payload = {}
     _payload["submission_file_path"] = "data/sample_submission.csv"
     print(evaluator._evaluate(_payload))
